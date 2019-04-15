@@ -1,0 +1,17 @@
+# username
+zhujl
+
+:
+# password
+123456
+
+@
+#address
+tcp(192.168.11.22)
+
+/
+# database name
+zhujl_gomysync
+
+?
+timeout=10s

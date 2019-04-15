@@ -1,0 +1,15 @@
+{
+	"Log": "server.log",
+	"Listen": ":9443",
+	"NotifyListen": ":9444",
+	"NotifyServerAddr": "127.0.0.1:9444",
+	"NotifyServerName" : "huarui.ranyu.net",
+	"ClientCA": "cert/clientca.pem",
+	"Cert": "cert/sv1.pem",
+	"CertKey": "cert/sv1.key",
+
+	"SyncTableName": "bus_authorized",
+	"SyncColumns": "$id,$bus_plate,$valid_start,$valid_end,valid_count,valid_status,$valid_entity,$valid_device_id,$business_code,$title,$last_modify,$remarks",
+	"SyncClientBeforeFullUpdate": "UPDATE $_TABLE SET valid_status=1",
+	"SyncFullUpdate": "SELECT $_COLUMNS FROM $_TABLE WHERE valid_status = 0"
+}

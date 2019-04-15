@@ -1,0 +1,17 @@
+# username
+huaruitest
+
+:
+# password
+123456
+
+@
+#address
+tcp(127.0.0.1)
+
+/
+# database name
+huaruierp
+
+?
+timeout=10s
