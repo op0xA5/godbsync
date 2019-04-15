@@ -4,3 +4,4 @@ cert/*
 *.log
 server/cert/*
 src/github.com
+*.dsn
