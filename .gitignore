@@ -1,0 +1,6 @@
+.vscode
+cert/*
+*.exe
+*.log
+server/cert/*
+src/github.com
