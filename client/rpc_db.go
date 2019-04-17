@@ -100,7 +100,10 @@ func (*RpcDB) Exec(args *DBQueryArgs, reply *DBExecReply) error {
 	if err != nil {
 		return err
 	}
-	result, err := q.Exec(args.Command, args.Params...)
+
+	qs := DB.BeforeQuery(args.Command, args.Params...)	
+	result, err := q.Exec(qs.SQL, qs.Params...)
+	qs.EndQuery(err)
 	if err != nil {
 		return err
 	}
@@ -113,7 +116,9 @@ func (*RpcDB) Query(args *DBQueryArgs, reply *DBQueryReply) error {
 	if err != nil {
 		return err
 	}
-	rows, err := q.Query(args.Command, args.Params...)
+	qs := DB.BeforeQuery(args.Command, args.Params...)
+	rows, err := q.Query(qs.SQL, qs.Params...)
+	qs.EndQuery(err)
 	if err != nil {
 		return err
 	}
@@ -137,7 +142,9 @@ func (*RpcDB) QueryAll(args *DBQueryArgs, reply *DBQueryAllReply) error {
 	if err != nil {
 		return err
 	}
-	rows, err := q.Query(args.Command, args.Params...)
+	qs := DB.BeforeQuery(args.Command, args.Params...)
+	rows, err := q.Query(qs.SQL, qs.Params...)
+	qs.EndQuery(err)
 	if err != nil {
 		return err
 	}
@@ -163,7 +170,9 @@ func (*RpcDB) QueryScalar(args *DBQueryArgs, reply *int64) error {
 	}
 
 	var rtn int64
-	err = q.QueryRow(args.Command, args.Params...).Scan(&rtn)
+	qs := DB.BeforeQuery(args.Command, args.Params...)
+	err = q.QueryRow(qs.SQL, qs.Params...).Scan(&rtn)
+	qs.EndQuery(err)
 	if err != nil {
 		return err
 	}
